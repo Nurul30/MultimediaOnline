@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>test</title>
+	<style type="text/css">
+		#myCanvas{
+			background-image: url(bg-canvas.jpg);
+		    background-size: cover;
+		    background-repeat: no-repeat;
+		    background-position: center;
+		    height: calc(100vh - 22px);
+		    width: 100%;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="myCanvas" style="border: 1px solid black;"></canvas>
+</body>
+
+<script type="text/javascript">
+	var myCanvas = document.getElementById('myCanvas');
+	myCanvas.width = document.body.clientWidth;
+	myCanvas.height = document.body.clientHeight;
+	var context = myCanvas.getContext('2d');
+
+	var xPos, yPos = 380, speed = 2;
+	var timer;
+	var mobil = new Image();
+	mobil.src = 'mobil.gif';
+	mobil.onload = function(){
+		xPos = -400;
+		// playAnim();
+		context.drawImage(mobil, xPos, yPos);
+	};
+
+	window.addEventListener('keydown', onKeyEnter, false);
+
+	function onKeyEnter(e){
+	console.log(e.keyCode);
+		// space key
+		if (e.keyCode == "32") {
+			berhenti();
+		}
+
+		// left key
+		if (e.keyCode == "37") {
+			mundur();
+		}
+
+		// up key
+		if(e.keyCode=="38"){
+			tambahKecepatan();
+		}
+
+		// right key
+		if (e.keyCode == "39") {
+			maju();
+		}
+
+		// down key
+		if (e.keyCode == "40") {
+			kurangiKecepatan();
+		}
+	}
+
+	function maju(){
+		clearInterval(timer);
+		timer = setInterval(function() {		      
+		    return function () {
+		    	context.clearRect(0, 0, myCanvas.width, myCanvas.height);
+		        context.drawImage(mobil, xPos, yPos);
+				context.beginPath();
+				
+				// line 1
+				context.moveTo(xPos, yPos+20);
+				context.lineTo(xPos-100, yPos-10);
+				context.strokeStyle = 'whitesmoke';
+				context.stroke();
+
+				// line 2
+				context.beginPath();
+				context.moveTo(xPos, yPos+40);
+				context.lineTo(xPos-100, yPos+15);
+				context.stroke();
+				
+				// line 4
+				context.beginPath();
+				context.moveTo(xPos-5, yPos+60);
+				context.lineTo(xPos-100, yPos+40);
+				context.stroke();
+				
+				// line 4
+				context.beginPath();
+				context.moveTo(xPos-10, yPos+70);
+				context.lineTo(xPos-100, yPos+70);
+				context.stroke();
+				
+				// line 5
+				context.beginPath();
+				context.moveTo(xPos, yPos+80);
+				context.lineTo(xPos-100, yPos+90);
+				context.stroke();
+				
+		        xPos += speed;
+		        if (xPos > myCanvas.width) {
+		        	xPos = -400;
+		        }
+		    };
+		}(), 1000/40);
+	}
+
+	function berhenti(){
+		clearInterval(timer);
+		context.clearRect(0, 0, myCanvas.width, myCanvas.height);
+		context.drawImage(mobil, xPos, yPos);
+	}
+
+	function mundur(){
+		clearInterval(timer);
+		timer = setInterval(function() {		      
+		    return function () {
+		    	context.clearRect(0, 0, myCanvas.width, myCanvas.height);
+		        context.drawImage(mobil, xPos, yPos);
+
+		        xPos -= speed;
+		        if (xPos < -400) {
+		        	xPos = myCanvas.width;
+		        }
+		    };
+		}(), 1000/40);
+	}
+
+	function tambahKecepatan(){
+		speed +=2
+	}
+
+	function kurangiKecepatan(){
+		if(speed>2) speed -=2;
+	}
+</script>
+</html>
