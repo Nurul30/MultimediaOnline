@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+
+<div class="bg"></div>
+<div id="click">Click to start audio</div>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1" width="1" height="1">
+  <defs>
+    <symbol id="snowflake" viewBox="0 0 894 874" fill-rule="evenodd" fill="#FFF">
+  <path d="M449.976 322.322L335.69 436.608l114.286 114.286L564.26 436.608 449.976 322.322zm-5.657 102.8v-28.92h-24.244v81.38h24.244v-29.488l29.41 29.41 17.143-17.143-23.754-23.753 23.754-23.754-17.143-17.142-29.41 29.41z"/>
+  <path d="M465.258 656.847l132.545 132.546-83.822 83.822-23.341-23.341 60.482-60.481L449.98 688.25 348.837 789.393l60.482 60.481-23.34 23.341-83.823-83.822 132.546-132.546V483.515h30.556v173.332zm169.444-204.962l-72.342 72.342 9.04 9.041h121.374v122.899l32.953 32.954 103.894-4.329 1.271 30.53-96.547 4.022-4.023 96.548-30.529-1.272 4.328-103.893-32.953-32.954h-122.9V553.348l-66.967-66.967.655-.654-8.223-8.223 17.143-17.143-23.753-23.754 23.753-23.753-17.143-17.143 8.556-8.556-2.18-2.18 68.159-68.16V195.442h122.9l32.953-32.954-4.328-103.893 30.529-1.272 4.023 96.548 96.547 4.022-1.271 30.529-103.894-4.328-32.953 32.954v122.899H568.348l-7.514 7.515 73.868 73.868h42.145l132.546-132.546 83.822 83.822-23.341 23.341-60.481-60.482L708.25 436.607 809.393 537.75l60.481-60.482 23.341 23.341-83.822 83.822-132.546-132.546h-42.145zM340.754 345.833l-5.886-5.886H210.442V217.048l-32.954-32.954-103.893 4.328-1.271-30.529 96.547-4.022 4.023-96.548 30.529 1.272-4.329 103.893 32.954 32.954h122.9v121.373l68.159 68.16-3.808 3.809 7.418 7.417h-6.638v27.649l-17.923-17.923-.655.654-43.604-43.605-73.632 73.631 72.106 72.106 43.938-43.938 2.18 2.18 17.59-17.59v28.216h6.07l-6.517 6.517 2.283 2.283-66.967 66.967v124.425h-122.9l-32.953 32.954 4.328 103.893-30.529 1.272-4.023-96.548-96.547-4.022 1.271-30.53 103.893 4.329 32.954-32.954V533.268h121.374l7.412-7.412-73.97-73.971h-48.89L83.822 584.431 0 500.609l23.341-23.341 60.481 60.482 101.142-101.143L83.822 335.465l-60.481 60.482L0 372.606l83.822-83.822L216.368 421.33h48.89l75.496-75.497zm321.464 217.99h-83.394v83.394h83.394v-83.394zm-337.826 0h-83.394v83.394h83.394v-83.394zm177.323-157.242l-2.283-2.283-32.309 32.309 31.976 31.977 3.808-3.809 42.31 42.31 65.019-65.02v-10.916l-66.545-66.544-41.976 41.976zM449.98 453.75l-5.657 5.657v-11.314l5.657 5.657zm0-34.285l-5.657 5.656v-11.313l5.657 5.657zm15.278-22.832h-30.556V216.368L302.156 83.822 385.979 0l23.34 23.341-60.482 60.481L449.98 184.964 551.122 83.822 490.64 23.341 513.981 0l83.822 83.822-132.545 132.546v180.265zm196.96-170.636h-83.394v83.395h83.394v-83.395zm-337.826 0h-83.394v83.395h83.394v-83.395z"/>
+    </symbol>
+  </defs>
+  
+</svg>
+
+<head>
+	<title>Tugas Akhir</title>
+</head>
+<style type="text/css">
+	body {
+  overflow: hidden;
+  min-height: 100vh;
+  background: #000;
+}
+
+#click {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 10;
+  transform: translate(-50%,-50%);
+  animation: scale-in .4s cubic-bezier(0, .3, 1);
+  text-shadow: 0 1px 0 #FFF;
+  background: rgba(255,255,255,0.75);
+  color: #000;
+  padding: 0.5em 1em;
+  border-radius: 3px;
+  @keyframes scale-in {
+    from { opacity: 0; transform:  translate(-50%,-50%) scale(0.5); }
+  }
+}
+
+.bg {
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  margin: auto;
+  background-image: url(https://source.unsplash.com/O7L3MrlSAHA/1000x1200);
+  background-size: cover;
+  background-position: bottom center;
+  opacity: 0.8;
+}
+
+canvas {
+  position: absolute;
+  right: 0; bottom: 0; left: 0;
+  margin: auto;
+  width: 100%;
+  height: 30%;
+  opacity: 0.8;
+  image-rendering: pixelated;
+}
+
+/* ---------------------------------- */
+
+.snowflake {
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: fall 3s linear both;
+  transform-origin: center center;
+  left: calc( 100% * var(--x, 0.5));
+  animation-duration: calc( 4s * var(--intensity, 1) );
+  max-width: 8vw;
+  svg { max-width: 100%; }
+  
+  @keyframes fall {
+    from { 
+      transform: 
+        translateX(-50%)
+        translateY(-100%) 
+        rotate(-1turn) 
+        scale(var(--intensity, 1));
+    } 
+    to { 
+      transform: 
+        translateX(-50%)
+        translateY(100vh) 
+        rotate(1turn) 
+        scale(var(--intensity, 1));
+    }
+  }
+  
+}
+</style>
+<body>
+<script type="text/javascript">
+	const numberOfNodes = 16;
+const TRIGGER_THRESHOLD = 120;
+const triggered = [];
+
+const audioCtx = new AudioContext();
+const data = new Uint8Array(numberOfNodes * 4);
+
+// elVisualizer.style.setProperty('--total', numberOfNodes);
+
+// const elNodes = Array.from({ length: numberOfNodes }, (n,i)=> {
+//   let node = document.createElement('div');
+//   node.className = 'node';
+//   node.style.setProperty('--i',i);
+//   elVisualizer.appendChild(node);
+//   return node;
+// });
+
+const analyserNode = new AnalyserNode(audioCtx, {
+  fftSize: 2 ** 8,
+  maxDecibels: -20,
+  minDecibels: -80,
+  smoothingTimeConstant: 0.8
+});
+
+
+function updateVisualizer(){
+  requestAnimationFrame(updateVisualizer);
+
+  analyserNode.getByteFrequencyData(data);
+  
+  updateCanvas(data);
+  
+  data.forEach( (vol,i) => {
+    if ( vol > TRIGGER_THRESHOLD && !triggered[i]) { 
+      createSnowflake({ 
+        x: i / numberOfNodes, 
+        intensity: vol / 255 
+      }); 
+      triggered[i] = true;
+      setTimeout(()=>{
+        triggered[i] = false;
+      },1000);
+    }
+  });
+
+//   elNodes.forEach( (node,i) => {
+//     node.style.setProperty(
+//       '--level', 
+//       (data[i] / 255) 
+//       // Attempt a log-ish scale for sensitivity in higher registers
+//       * (1 + (i / numberOfNodes))
+//     );
+//   });
+
+  //window.volume.textContent = Math.round( (data[0] / 255) * 10) / 10;
+
+}
+
+function startStream(){
+  //window.volume.innerHTML = ' &nbsp; ';
+
+  return navigator.mediaDevices
+    .getUserMedia({ audio: true, video: false })
+    .then( stream => audioCtx.createMediaStreamSource(stream) )
+    .then( source => {
+    source.connect(analyserNode);
+  }).then(updateVisualizer);
+
+}
+
+const click =  document.getElementById('click');
+// Have to initialize via a user event
+document.addEventListener('click', ()=>{
+  click.parentNode && click.parentNode.removeChild(click);
+  audioCtx.resume();
+  startStream();
+});
+
+/* ---------------------------------- */
+
+function createSnowflake(props = {}) {
+  const elSnowflake = document.createElement('div');
+  elSnowflake.innerHTML = `<svg width="150" height="150">
+  <use xlink:href="#snowflake" />
+</svg>`;
+  elSnowflake.className = "snowflake ";
+  
+  for (var key in props ) {
+    elSnowflake.style.setProperty('--' + key, props[key]);
+  }
+  document.body.appendChild(elSnowflake);
+  
+  setTimeout(()=>{
+    document.body.removeChild(elSnowflake);
+  },4100);
+  
+  return elSnowflake;
+}
+
+createSnowflake();
+
+/* ---------------------------------- */
+
+const canvas = document.createElement('canvas'),
+      ctx = canvas.getContext('2d');
+
+canvas.width = numberOfNodes;
+canvas.height = 30;
+
+document.body.appendChild(canvas);
+
+function updateCanvas(data) {
+  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+  ctx.fillStyle = '#FFF';
+  data && data.forEach( (vol,i) => {
+    ctx.fillRect(i, canvas.height, 1, (vol / 255) * -canvas.height);
+  });
+  
+}
+
+updateCanvas();
+</script>
+</body>
+</html>
